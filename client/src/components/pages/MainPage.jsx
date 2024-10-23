@@ -1,10 +1,9 @@
 import React from 'react'
 
-export default function Layout() {
+export default function MainPage() {
   return (
     <div>
       
     </div>
   )
 }
-
