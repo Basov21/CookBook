@@ -6,7 +6,7 @@ export default function MainPage() {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    axiosInstance.get('/receipes').then((response) => {
+    axiosInstance.get('/recipes').then((response) => {
       setRecipes(response.data);
     });
   }, []);
