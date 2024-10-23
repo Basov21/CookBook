@@ -1,50 +1,30 @@
-import { useEffect, useState } from 'react';
-import axiosInstance, { setAccessToken } from '../components/api/axiosInstance';
-export default function useUser() {
-  const [user, setUser] = useState({ status: 'fetching', data: null });
-  useEffect(() => {
-    axiosInstance('/tokens/refresh')
-      .then(({ data }) => {
-        setTimeout(() => {
-          setUser({ status: 'logged', data: data.user });
-        }, 1000);
-        setAccessToken(data.accessToken);
-      })
-      .catch(() => {
-        setUser({ status: 'guest', data: null });
-        setAccessToken('');
-      });
-  }, []);
-  const logoutHandler = () => {
-    axiosInstance
-      .get('/auth/logout')
-      .then(() => setUser({ status: 'guest', data: null }));
-    setAccessToken('');
-  };
-  const signUpHandler = (e) => {
-    e.preventDefault();
-    const formData = Object.fromEntries(new FormData(e.target));
-    if (!formData.email || !formData.password || !formData.name) {
-      return alert('Неправильно введены данные или ');
-    }
-    axiosInstance.post('/auth/signup', formData).then(({ data }) => {
-      setUser({ status: 'logged', data: data.user });
-    });
-  };
-  const signInHandler = (e) => {
-    e.preventDefault();
-    const formData = Object.fromEntries(new FormData(e.target));
-    if (!formData.email || !formData.password) {
-      return alert('Неверный логин или пароль');
-    }
-    axiosInstance.post('/auth/signin', formData).then(({ data }) => {
-      setUser({ status: 'logged', data: data.user });
-    });
-  };
-  return {
-    user,
-    signInHandler,
-    signUpHandler,
-    logoutHandler,
-  };
+import axios from 'axios';
+const axiosInstance = axios.create({
+  baseURL: '/api',
+});
+let accessToken = '';
+function setAccessToken(newToken) {
+  accessToken = newToken;
 }
+axiosInstance.interceptors.request.use((config) => {
+  if (!config.headers.Authorization) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
+  return config;
+});
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const prevRequest = error.config;
+    if (error.response.status === 403 && !prevRequest.sent) {
+      const response = await axios('/api/tokens/refresh');
+      accessToken = response.data.accessToken;
+      prevRequest.sent = true;
+      prevRequest.headers.Authorization = `Bearer ${accessToken}`;
+      return axiosInstance(prevRequest);
+    }
+    return Promise.reject(error);
+  },
+);
+export { setAccessToken };
+export default axiosInstance;
