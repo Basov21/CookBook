@@ -1,6 +1,5 @@
 const express = require('express');
 const { Favourite } = require('../../db/models');
-const { where } = require('sequelize');
 const favouriteRouter = express.Router();
 
 favouriteRouter.get('/:id', async (req, res) => {
