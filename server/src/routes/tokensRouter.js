@@ -1,17 +1,17 @@
-const express = require('express');
+const tokensRouter = require('express').Router();
+const cookieConfig = require('../configs/cookieConfig');
 const verifyRefreshToken = require('../middlewares/verifyRefreshToken');
 const generateTokens = require('../utils/generateTokens');
-const cookieConfig = require('../configs/cookieConfig');
 
-const tokensRouter = express.Router();
+
+
 
 tokensRouter.get('/refresh', verifyRefreshToken, (req, res) => {
-  const { user } = res.locals;
-  const { accessToken, refreshToken } = generateTokens({ user });
+  const { accessToken, refreshToken } = generateTokens({ user: res.locals.user, });
   res
     .status(200)
     .cookie('refreshToken', refreshToken, cookieConfig)
-    .json({ user, accessToken });
+    .json({ user: res.locals.user, accessToken });
 });
 
 module.exports = tokensRouter;

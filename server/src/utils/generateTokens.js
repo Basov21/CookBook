@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const jwtConfig = require('../configs/jwtConfig');
+const jwtConfig = require('../configs/jwtConfig.js');
 require('dotenv').config();
 
 function generateTokens(payload) {

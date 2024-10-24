@@ -1,6 +1,6 @@
-const express = require('express');
+const authRouter = require('express').Router();
+
 const bcrypt = require('bcrypt');
-const authRouter = express.Router();
 const { User } = require('../../db/models');
 const generateTokens = require('../utils/generateTokens');
 const cookieConfig = require('../configs/cookieConfig');
