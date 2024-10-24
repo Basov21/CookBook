@@ -2,6 +2,7 @@
 
 const { hashSync } = require('bcrypt');
 const { User } = require('../models');
+const { Favourite } = require('../models')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -161,8 +162,15 @@ module.exports = {
           img: 'https://media.vprok.ru/recipe/x956/of/hb/twheiy5w7s3nmggxg65tzdfjbecjhbof.jpeg',
         },
       ],
-      
+
     );
+
+    await Favourite.bulkCreate([
+      {
+        userId: 1,
+        recipeId: 2
+      }
+    ]);
   },
 
   async down(queryInterface, Sequelize) {
