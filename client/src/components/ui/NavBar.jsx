@@ -20,7 +20,7 @@ export default function NavBar({ user, logoutHandler }) {
             <Button variant="outline-danger" href="/favourites">
               Избранное
             </Button>{' '}
-            <Button variant="outline-info" onClick={logoutHandler}>
+            <Button variant="outline-info" onClick={logoutHandler} href="/">
               Выйти
             </Button>{' '}
           </>

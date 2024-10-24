@@ -1,8 +1,10 @@
+import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-export default function loginPage({ loginHandler }) {
+
+export default function Login({ loginHandler }) {
   return (
     <Row>
       <Col md={{ span: 6, offset: 3 }} className="mt-5">
