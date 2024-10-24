@@ -13,7 +13,7 @@ import SignupPage from './components/pages/SignupPage';
 
 function App() {
   const [user, setUser] = useState();
-  const [recipes, setRecipes] = useState([]);
+
 
 
 
@@ -62,11 +62,7 @@ function App() {
     window.location.href = '/';
   };
 
-  useEffect(() => {
-    axiosInstance.get('/recipes').then((response) => {
-      setRecipes(response.data);
-    });
-  }, []);
+
 
 
 
