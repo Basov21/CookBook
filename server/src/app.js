@@ -2,10 +2,11 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 
-const recipeRouter = require('./routes/recipe.Router');
+const recipeRouter = require('./routes/recipeRouter');
 const authRouter = require('./routes/authRouter');
 const tokensRouter = require('./routes/tokensRouter');
 const favouriteRouter = require('./routes/userRouter');
+
 
 const app = express();
 
