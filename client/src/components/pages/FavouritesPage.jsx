@@ -13,6 +13,7 @@ export default function FavouritesPage({user}) {
   }, []);
 
 
+console.log(recipes);
 
   return (
 
@@ -23,3 +24,4 @@ export default function FavouritesPage({user}) {
 
   )
 }
+
