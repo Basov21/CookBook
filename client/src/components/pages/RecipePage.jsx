@@ -27,7 +27,7 @@ export default function RecipePage({user}) {
       </Card.Body>
       <ListGroup className="list-group-flush">
         <ListGroup.Item><h6>Ингредиенты: </h6>{recipe.ingredients}</ListGroup.Item>
-        <ListGroup.Item><h6>Колличество ингредиентов: </h6>{recipe.quantity}</ListGroup.Item>
+        <ListGroup.Item><h6>Количество ингредиентов: </h6>{recipe.quantity}</ListGroup.Item>
         <ListGroup.Item><h6>Способ приготовления: </h6>{recipe.instruction}</ListGroup.Item>
         <ListGroup.Item><h6>Время приготовления: </h6>{recipe.time}</ListGroup.Item>
       </ListGroup>
