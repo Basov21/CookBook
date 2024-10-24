@@ -30,12 +30,12 @@ export default function MainPage({ user }) {
     <div>
       <div style={{textAlign: 'center', marginTop: '50px', fontSize: '20px', color: 'red'}}>
       <select onChange={(e) => setSortOrder(e.target.value)}>
-          <option value="">Нет сортировки</option>
-          <option value="timeAsc">Сортировать по времени (возрастание)</option>
-          <option value="timeDesc">Сортировать по времени (убывание)</option>
-          <option value="quantityAsc">Сортировать по количеству ингредиентов (возрастание)</option>
-          <option value="quantityDesc">Сортировать по количеству ингредиентов (убывание)</option>
-        </select>
+            <option value="">Нет сортировки</option>
+            <option value="timeAsc">Сортировать по времени (возрастание)</option>
+            <option value="timeDesc">Сортировать по времени (убывание)</option>
+            <option value="quantityAsc">Сортировать по количеству ингредиентов (возрастание)</option>
+            <option value="quantityDesc">Сортировать по количеству ингредиентов (убывание)</option>
+          </select>
       </div>
       {sortedRecipes.map((recipe) => (
         <RecipeCard key={recipe.id} recipe={recipe} user={user} />
