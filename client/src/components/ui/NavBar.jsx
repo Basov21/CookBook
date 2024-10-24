@@ -9,11 +9,11 @@ export default function NavBar({ user, logoutHandler }) {
     <Navbar
       expand="lg"
       className="bg-body-tertiary"
-      style={{ display: 'flex', justifyContent: 'space-between' }}
+      style={{ display: 'flex', justifyContent: 'space-evenly', top: "20px"}}
     >
       <Container>
         <Button variant="outline-secondary" href="/">
-          {user ? user.name : 'Гость'}, эти рецепты для тебя
+          {user ? user.name : 'Гость'}, рецепты для тебя
         </Button>{' '}
         {user ? (
           <>
