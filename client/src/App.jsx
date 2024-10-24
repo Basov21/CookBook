@@ -8,6 +8,7 @@ import RecipePage from './components/pages/RecipePage';
 import ProtectedRouter from './components/HOCs/ProtectedRouter';
 import LoginPage from './components/pages/LoginPage';
 import SignupPage from './components/pages/SignupPage';
+import ErrorPage from './components/pages/ErrorPage';
 
 function App() {
   const [user, setUser] = useState();
@@ -60,6 +61,7 @@ function App() {
   const router = createBrowserRouter([
     {
       element: <Layout user={user} logoutHandler={logoutHandler} />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: '/',
