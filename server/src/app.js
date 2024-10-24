@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/tokens', tokensRouter);
-app.use('/api/auth', authRouter);
+app.use('/api', authRouter);
 app.use('/api/recipes', recipeRouter);
 app.use('/api/favourites', favouriteRouter)
 
