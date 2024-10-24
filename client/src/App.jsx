@@ -10,9 +10,10 @@ import ProtectedRouter from './components/HOCs/ProtectedRouter';
 import LoginPage from './components/pages/LoginPage';
 import SignupPage from './components/pages/SignupPage';
 
+
 function App() {
   const [user, setUser] = useState();
-  const [recipes, setRecipes] = useState([]);
+
 
 
 
@@ -28,31 +29,40 @@ function App() {
       });
   }, []);
 
-  const signupHandler = async (e, formData) => {
+  const signupHandler = async (e) => {
     e.preventDefault();
-    const response = await axiosInstance.post('/auth/signup', formData);
-    setUser(response.data.user);
-    setAccessToken(response.data.accessToken);
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+    const res = await axiosInstance.post('/auth/signup', data);
+    if (res.status === 200) {
+      setUser(res.data.user);
+      setAccessToken(res.data.accessToken);
+    }
+    window.location.href = '/';
   };
 
-  const loginHandler = async (e, formData) => {
+  const loginHandler = async (e) => {
     e.preventDefault();
-    const response = await axiosInstance.post('/auth/login', formData);
-    setUser(response.data.user);
-    setAccessToken(response.data.accessToken);
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+    const res = await axiosInstance.post('/auth/signin', data);
+    if (res.status === 200) {
+      setUser(res.data.user);
+      setAccessToken(res.data.accessToken);
+    }
+    window.location.href = '/';
   };
 
   const logoutHandler = async () => {
-    await axiosInstance.get('/auth/logout');
-    setUser(null);
-    setAccessToken('');
+    const res = await axiosInstance.post('/auth/logout');
+    if (res.status === 200) {
+      setUser(null);
+      setAccessToken('');
+    }
+    window.location.href = '/';
   };
 
-  useEffect(() => {
-    axiosInstance.get('/recipes').then((response) => {
-      setRecipes(response.data);
-    });
-  }, []);
+
 
 
 
@@ -67,14 +77,14 @@ function App() {
           element: <MainPage />,
         },
         {
-          path: '/:recipeId',
-          element: <RecipePage recipes={recipes} setRecipes={setRecipes}/>,
+          path: '/recipes/:recipeId',
+          element: <RecipePage />,
         },
         {
-          path: '/account',
+          path: '/favourites',
           element: (
             <ProtectedRouter redirectPath="/login" isAllowed={!!user}>
-              <FavouritesPage user={user} recipes={recipes}/>
+              <FavouritesPage user={user} />
             </ProtectedRouter>
           ),
         },

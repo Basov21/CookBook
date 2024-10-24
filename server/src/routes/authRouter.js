@@ -13,7 +13,7 @@ authRouter.post('/signup', async (req, res) => {
     defaults: { name, hashpass },
   });
   if (!created) {
-    return res.status(400).json({ text: 'Почта уже используется' });
+    return res.status(400).json({ text: 'Неверный email или пароль' });
   }
 
   const user = newUser.get();
@@ -30,11 +30,11 @@ authRouter.post('/login', async (req, res) => {
 
   const targetUser = await User.findOne({ where: { email } });
   if (!targetUser) {
-    return res.status(400).json({ text: 'Неверный email' });
+    return res.status(400).json({ text: 'Неверный email или пароль' });
   }
   const isValid = await bcrypt.compare(password, targetUser.hashpass);
   if (!isValid) {
-    return res.status(400).json({ text: 'Неверный пароль' });
+    return res.status(400).json({ text: 'Неверный email или пароль' });
   }
 
   const user = targetUser.get();

@@ -1,29 +1,30 @@
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
-function BasicExample() {
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+export default function SignInPage({ signInHandler }) {
   return (
-    <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Ваш email</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
-        <Form.Text className="text-muted">
-          Мы не передаем информацию третьим лицам
-        </Form.Text>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Пароль</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Войти
-      </Button>
-    </Form>
+    <Row>
+      <Col md={{ span: 6, offset: 3 }} className="mt-5">
+        <h3 className="text-center">Вход</h3>
+        <Form onSubmit={signInHandler}>
+          <Form.Group className="mb-3" controlId="email">
+            <Form.Label>Email</Form.Label>
+            <Form.Control name="email" type="email" placeholder="Введите email" />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="password">
+            <Form.Label>Пароль</Form.Label>
+            <Form.Control
+              name="password"
+              type="password"
+              placeholder="Введите пароль"
+            />
+          </Form.Group>
+          <Button variant="outline-primary" type="submit">
+            Войти
+          </Button>
+        </Form>
+      </Col>
+    </Row>
   );
 }
-
-export default BasicExample;
