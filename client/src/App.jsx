@@ -83,9 +83,9 @@ function App() {
         {
           path: '/favourites',
           element: (
-            <ProtectedRouter redirectPath="/login" isAllowed={!!user}>
+
               <FavouritesPage user={user} />
-            </ProtectedRouter>
+
           ),
         },
         {
