@@ -1,4 +1,3 @@
-
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Layout from './components/Layout';
 import FavouritesPage from './components/pages/FavouritesPage';
@@ -10,12 +9,8 @@ import ProtectedRouter from './components/HOCs/ProtectedRouter';
 import LoginPage from './components/pages/LoginPage';
 import SignupPage from './components/pages/SignupPage';
 
-
 function App() {
   const [user, setUser] = useState();
-
-
-
 
   useEffect(() => {
     axiosInstance
@@ -45,7 +40,7 @@ function App() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    const res = await axiosInstance.post('/auth/login', data);
+    const res = await axiosInstance.post('/auth/signin', data);
     if (res.status === 200) {
       setUser(res.data.user);
       setAccessToken(res.data.accessToken);
@@ -62,15 +57,9 @@ function App() {
     window.location.href = '/';
   };
 
-
-
-
-
-
   const router = createBrowserRouter([
     {
-
-      element: <Layout user={user} logoutHandler={logoutHandler}/>,
+      element: <Layout user={user} logoutHandler={logoutHandler} />,
       children: [
         {
           path: '/',
