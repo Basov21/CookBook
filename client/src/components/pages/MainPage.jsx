@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import RecipeCard from '../ui/RecipeCard';
 import axiosInstance from '../../api/axiosInstance';
 
-export default function MainPage({ user }) {
+export default function MainPage({ handleAddFavourite }) {
   const [recipes, setRecipes] = useState([]);
   const [sortOrder, setSortOrder] = useState(null);
 
@@ -38,8 +38,7 @@ export default function MainPage({ user }) {
         </select>
       </div>
       {sortedRecipes.map((recipe) => (
-        <RecipeCard key={recipe.id} recipe={recipe} user={user} />
-      ))}
+        <RecipeCard key={recipe.id} recipe={recipe} handleAddFavourite={handleAddFavourite}/>))}
     </div>
   );
 }

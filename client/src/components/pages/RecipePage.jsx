@@ -5,7 +5,7 @@ import axiosInstance from '../../api/axiosInstance';
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/esm/Button';
 
-export default function RecipePage({user}) {
+export default function RecipePage({handleAddFavourite}) {
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);
 
@@ -32,7 +32,7 @@ export default function RecipePage({user}) {
         <ListGroup.Item><h6>Время приготовления: </h6>{recipe.time}</ListGroup.Item>
       </ListGroup>
       <Card.Body>
-        <Button variant="danger">В избранное</Button>{' '}
+        <Button variant="danger"  onClick={() => handleAddFavourite(recipe.id)}>В избранное </Button>{' '}
       </Card.Body>
     </Card>
   );

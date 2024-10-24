@@ -3,7 +3,7 @@ import axiosInstance from "../../api/axiosInstance";
 import RecipeCard from "../ui/RecipeCard";
 
 
-export default function FavouritesPage({user}) {
+export default function FavouritesPage({ favouriteRecipes, handleAddFavourite }) {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -16,13 +16,14 @@ export default function FavouritesPage({user}) {
     return <div style= {{textAlign: 'center', marginTop: '50px', fontSize: '20px', color: 'red'}}>Вы не добавили ни одного рецепта</div>;
   }
 
-  return (
+return (
 
-      <div>
-    {recipes.map((recipe) => (
-      <RecipeCard key={recipe.id} recipe={recipe} />))}
+  <div>
+    {console.log(favouriteRecipes)}
+    {favouriteRecipes.map((recipe) => (
+      <RecipeCard key={recipe.id} recipe={recipe} handleAddFavourite={handleAddFavourite}/>))}
   </div>
 
-  )
+)
 }
 
