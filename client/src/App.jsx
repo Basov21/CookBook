@@ -10,6 +10,7 @@ import LoginPage from './components/pages/LoginPage';
 import SignupPage from './components/pages/SignupPage';
 import ErrorPage from './components/pages/ErrorPage';
 
+
 function App() {
   const [user, setUser] = useState();
   const [favouriteRecipes, setFavouriteRecipes] = useState([]);
