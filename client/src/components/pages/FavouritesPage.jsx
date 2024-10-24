@@ -3,25 +3,16 @@ import axiosInstance from "../../api/axiosInstance";
 import RecipeCard from "../ui/RecipeCard";
 
 
-export default function FavouritesPage({user}) {
-  const [recipes, setRecipes] = useState([]);
+export default function FavouritesPage({ favouriteRecipes, handleAddFavourite }) {
 
-  useEffect(() => {
-    axiosInstance.get('/favourites').then((response) => {
-      setRecipes(response.data);
-    });
-  }, []);
+return (
 
-
-console.log(recipes);
-
-  return (
-
-      <div>
-    {recipes.map((recipe) => (
-      <RecipeCard key={recipe.id} recipe={recipe} />))}
+  <div>
+    {console.log(favouriteRecipes)}
+    {favouriteRecipes.map((recipe) => (
+      <RecipeCard key={recipe.id} recipe={recipe} handleAddFavourite={handleAddFavourite}/>))}
   </div>
 
-  )
+)
 }
 

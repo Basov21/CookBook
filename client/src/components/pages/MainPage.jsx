@@ -3,10 +3,8 @@ import RecipeCard from "../ui/RecipeCard";
 import axiosInstance from "../../api/axiosInstance";
 
 
-export default function MainPage() {
+export default function MainPage(handleAddFavourite) {
     const [recipes, setRecipes] = useState([]);
-
-
 
 
   useEffect(() => {
@@ -18,7 +16,7 @@ export default function MainPage() {
   return (
   <div>
     {recipes.map((recipe) => (
-      <RecipeCard key={recipe.id} recipe={recipe} />))}
+      <RecipeCard key={recipe.id} recipe={recipe} handleAddFavourite={handleAddFavourite}/>))}
   </div>
   )
 }
