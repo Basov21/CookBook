@@ -10,8 +10,27 @@ import LoginPage from './components/pages/LoginPage';
 import SignupPage from './components/pages/SignupPage';
 import ErrorPage from './components/pages/ErrorPage';
 
+
 function App() {
   const [user, setUser] = useState();
+  const [favouriteRecipes, setFavouriteRecipes] = useState([]);
+
+  useEffect(() => {
+    axiosInstance.get('/favourites').then((response) => {
+      setFavouriteRecipes(response.data);
+    });
+  }, []);
+
+  const handleAddFavourite = async (recipeId) => {
+    try {
+      const response = await axiosInstance.post('/favourites', { recipeId });
+      console.log(response);
+      // Обнови состояние избранных рецептов
+      setFavouriteRecipes((prev) => [response.data, ...prev]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     axiosInstance
@@ -60,22 +79,23 @@ function App() {
 
   const router = createBrowserRouter([
     {
+
       element: <Layout user={user} logoutHandler={logoutHandler} />,
       errorElement: <ErrorPage />,
       children: [
         {
           path: '/',
-          element: <MainPage user={user}/>,
+          element: <MainPage handleAddFavourite={handleAddFavourite}/>,
         },
         {
           path: '/recipes/:recipeId',
-          element: <RecipePage />,
+          element: <RecipePage handleAddFavourite={handleAddFavourite} />,
         },
         {
           path: '/favourites',
           element: (
 
-              <FavouritesPage user={user} />
+            <FavouritesPage favouriteRecipes={favouriteRecipes} handleAddFavourite={handleAddFavourite} />
 
           ),
         },

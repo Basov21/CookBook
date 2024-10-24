@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import RecipeCard from '../ui/RecipeCard';
 import axiosInstance from '../../api/axiosInstance';
+import Container from 'react-bootstrap/esm/Container';
+import Row from 'react-bootstrap/esm/Row';
+import Col from 'react-bootstrap/esm/Col';
 
-export default function MainPage({ user }) {
+export default function MainPage({ handleAddFavourite }) {
   const [recipes, setRecipes] = useState([]);
   const [sortOrder, setSortOrder] = useState(null);
 
@@ -27,8 +30,9 @@ export default function MainPage({ user }) {
   }, []);
 
   return (
-    <div>
-      <div style={{textAlign: 'center', marginTop: '50px', fontSize: '20px', color: 'red'}}>
+      <Container>
+      <Row>
+          <div style={{textAlign: 'center', marginTop: '50px', fontSize: '20px', color: 'red'}}>
       <select onChange={(e) => setSortOrder(e.target.value)}>
             <option value="">Нет сортировки</option>
             <option value="timeAsc">Сортировать по времени (возрастание)</option>
@@ -38,8 +42,11 @@ export default function MainPage({ user }) {
           </select>
       </div>
       {sortedRecipes.map((recipe) => (
-        <RecipeCard key={recipe.id} recipe={recipe} user={user} />
-      ))}
-    </div>
-  );
+            <Col key={recipe.id} md={6}>
+            <RecipeCard  recipe={recipe} handleAddFavourite={handleAddFavourite}/>
+          </Col>
+        ))}
+      </Row>
+      </Container>
+  );;
 }

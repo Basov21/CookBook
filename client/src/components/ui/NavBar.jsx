@@ -1,18 +1,16 @@
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { Link as RouterLink} from 'react-router-dom';
+
 
 export default function NavBar({ user, logoutHandler }) {
   return (
-    <Navbar
-      expand="lg"
-      className="bg-body-tertiary"
-      style={{ display: 'flex', justifyContent: 'space-evenly', top: "20px"}}
-    >
-      <Container>
-        <Button variant="outline-secondary" href="/">
+    <Navbar style={{backgroundColor: 'rgb(200, 255, 235)'}}>
+      <Container style={{display: 'flex', justifyContent: 'space-evenly', height: '100px' }}>
+        <Button variant="success" href="/">
           {user ? user.name : 'Гость'}, рецепты для тебя
         </Button>{' '}
         {user ? (
@@ -25,17 +23,26 @@ export default function NavBar({ user, logoutHandler }) {
             </Button>{' '}
           </>
         ) : (
+          <>
           <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
+            <Dropdown.Toggle variant="success" id="dropdown-basic" >
               Вход/Регистрация
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item><Link to="/login">Вход</Link></Dropdown.Item>
               
-              <Dropdown.Item><Link to="/signup">Регистрация</Link></Dropdown.Item>
+            <Dropdown.Item >
+                <Link style={{ textDecoration: 'none' }} to="/login">Вход</Link>
+                </Dropdown.Item>
+              
+                
+                <Dropdown.Item >
+                <Link style={{ textDecoration: 'none' }} to="/signup">Регистрация</Link>
+                </Dropdown.Item>
+              
             </Dropdown.Menu>
           </Dropdown>
+          </>
         )}
       </Container>
     </Navbar>

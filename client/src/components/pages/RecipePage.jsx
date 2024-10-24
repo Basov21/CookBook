@@ -1,11 +1,12 @@
 import { Link, useParams } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import axiosInstance from '../../api/axiosInstance';
+
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/esm/Button';
+import axiosInstance from '../../api/axiosInstance';
 
-export default function RecipePage({user}) {
+export default function RecipePage({handleAddFavourite}) {
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);
 
@@ -20,19 +21,35 @@ export default function RecipePage({user}) {
   }
 
   return (
-    <Card style={{ width: '30rem', marginLeft: "auto", marginRight: "auto", top: "50px"}}>
-      <Card.Img variant="top" src={recipe.img} />
+    <Card
+      style={{ width: '30rem', marginLeft: 'auto', marginRight: 'auto', top: '50px', borderRadius: "25px" }}
+    >
+      <Card.Img variant="top" src={recipe.img} style={{borderRadius: "25px"}} />
       <Card.Body>
-        <Card.Title><h4>{recipe.title}</h4></Card.Title>
+        <Card.Title>
+          <h4>{recipe.title}</h4>
+        </Card.Title>
       </Card.Body>
       <ListGroup className="list-group-flush">
-        <ListGroup.Item><h6>Ингредиенты: </h6>{recipe.ingredients}</ListGroup.Item>
-        <ListGroup.Item><h6>Количество ингредиентов: </h6>{recipe.quantity}</ListGroup.Item>
-        <ListGroup.Item><h6>Способ приготовления: </h6>{recipe.instruction}</ListGroup.Item>
-        <ListGroup.Item><h6>Время приготовления: </h6>{recipe.time}</ListGroup.Item>
+        <ListGroup.Item>
+          <h6>Ингредиенты: </h6>
+          {recipe.ingredients}
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <h6>Колличество ингредиентов: </h6>
+          {recipe.quantity}
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <h6>Способ приготовления: </h6>
+          {recipe.instruction}
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <h6>Время приготовления: </h6>
+          {recipe.time} минут
+        </ListGroup.Item>
       </ListGroup>
       <Card.Body>
-        <Button variant="danger">В избранное</Button>{' '}
+        <Button variant="danger"  onClick={() => handleAddFavourite(recipe.id)}>В избранное </Button>{' '}
       </Card.Body>
     </Card>
   );

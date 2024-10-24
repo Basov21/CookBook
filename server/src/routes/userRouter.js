@@ -14,8 +14,19 @@ favouriteRouter
   .post(verifyAccessToken, async (req, res) => {
     // const { id } = req.params;
     // const { recipeId } = req.body;
-    const favourite = await Favourite.create({  userId: res.locals.user.id, recipeId:req.body.resipeId});
-    res.json(favourite);
+    // const favourite = await Favourite.create({  userId: res.locals.user.id, recipeId:req.body.recipeId});
+    // res.json(favourite);
+    try {
+      const { recipeId } = req.body;
+      const userId = res.locals.user.id;
+  
+      const favourite = await Favourite.create({ userId, recipeId });
+      res.json(favourite);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: 'Failed to add favourite' });
+    }
+  
   });
 
 module.exports = favouriteRouter
