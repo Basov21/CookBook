@@ -12,7 +12,9 @@ export default function FavouritesPage({user}) {
     });
   }, []);
 
-
+  if (recipes.length === 0) {
+    return <div style= {{textAlign: 'center', marginTop: '50px', fontSize: '20px', color: 'red'}}>Вы не добавили ни одного рецепта</div>;
+  }
 
   return (
 
