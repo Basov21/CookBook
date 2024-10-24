@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import RecipeCard from "../ui/RecipeCard";
 import axiosInstance from "../../api/axiosInstance";
 
+
 export default function MainPage() {
-  const [recipes, setRecipes] = useState([]);
+    const [recipes, setRecipes] = useState([]);
+
+
+
 
   useEffect(() => {
     axiosInstance.get('/recipes').then((response) => {

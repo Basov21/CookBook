@@ -10,8 +10,12 @@ import ProtectedRouter from './components/HOCs/ProtectedRouter';
 import LoginPage from './components/pages/LoginPage';
 import SignupPage from './components/pages/SignupPage';
 
+
 function App() {
   const [user, setUser] = useState();
+  const [recipes, setRecipes] = useState([]);
+
+
 
   useEffect(() => {
     axiosInstance
@@ -58,9 +62,18 @@ function App() {
     window.location.href = '/';
   };
 
+  useEffect(() => {
+    axiosInstance.get('/recipes').then((response) => {
+      setRecipes(response.data);
+    });
+  }, []);
+
+
+
+
   const router = createBrowserRouter([
     {
-      path: '/',
+
       element: <Layout user={user} logoutHandler={logoutHandler}/>,
       children: [
         {
@@ -68,7 +81,7 @@ function App() {
           element: <MainPage />,
         },
         {
-          path: '/:recipeId',
+          path: '/recipes/:recipeId',
           element: <RecipePage />,
         },
         {
