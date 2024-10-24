@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-
 function verifyAccessToken(req, res, next) {
   try { 
     const accessToken = req.headers.authorization.split(' ')[1];
@@ -8,7 +7,7 @@ function verifyAccessToken(req, res, next) {
     res.locals.user = user;
     next();
   } catch (error) {
-    console.log('Invalid Access token');
+    console.log('Invalid Access token', error);
     res.status(403).send('Forbidden');
   }
 }
