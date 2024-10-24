@@ -40,7 +40,7 @@ function App() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    const res = await axiosInstance.post('/auth/signin', data);
+    const res = await axiosInstance.post('/auth/login', data);
     if (res.status === 200) {
       setUser(res.data.user);
       setAccessToken(res.data.accessToken);
