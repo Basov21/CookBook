@@ -161,7 +161,7 @@ module.exports = {
           img: 'https://media.vprok.ru/recipe/x956/of/hb/twheiy5w7s3nmggxg65tzdfjbecjhbof.jpeg',
         },
       ],
-      {},
+      
     );
   },
 

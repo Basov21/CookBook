@@ -5,7 +5,7 @@ import NavBar from './ui/NavBar';
 export default function Layout({ user, logoutHandler}) {
   return (
     <div>
-      <NavBar user={user}/>
+      <NavBar user={user} logoutHandler={logoutHandler}/>
       <Outlet />
     </div>
   );

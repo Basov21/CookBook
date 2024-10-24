@@ -1,9 +1,10 @@
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-function BasicExample() {
+function LoginForm({ loginHandler }) {
   return (
-    <Form>
+    <Form onSubmit={loginHandler}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Ваш email</Form.Label>
         <Form.Control type="email" placeholder="Enter email" />
@@ -26,4 +27,4 @@ function BasicExample() {
   );
 }
 
-export default BasicExample;
+export default LoginForm;

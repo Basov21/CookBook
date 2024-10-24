@@ -10,6 +10,7 @@ import ProtectedRouter from './components/HOCs/ProtectedRouter';
 import LoginPage from './components/pages/LoginPage';
 import SignupPage from './components/pages/SignupPage';
 
+
 function App() {
   const [user, setUser] = useState();
   const [recipes, setRecipes] = useState([]);
@@ -67,14 +68,14 @@ function App() {
           element: <MainPage />,
         },
         {
-          path: '/:recipeId',
-          element: <RecipePage recipes={recipes} setRecipes={setRecipes}/>,
+          path: '/recipes/:recipeId',
+          element: <RecipePage />,
         },
         {
           path: '/account',
           element: (
             <ProtectedRouter redirectPath="/login" isAllowed={!!user}>
-              <FavouritesPage user={user} recipes={recipes}/>
+              <FavouritesPage user={user} />
             </ProtectedRouter>
           ),
         },

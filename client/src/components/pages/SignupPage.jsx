@@ -1,13 +1,15 @@
+import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-export default function SignInPage({ signInHandler }) {
+
+export default function SignUpForm({ signupHandler }) {
   return (
     <Row>
       <Col md={{ span: 6, offset: 3 }} className="mt-5">
         <h3 className="text-center">Sign In</h3>
-        <Form onSubmit={signInHandler}>
+        <Form onSubmit={signupHandler}>
           <Form.Group className="mb-3" controlId="email">
             <Form.Label>Email</Form.Label>
             <Form.Control name="email" type="email" placeholder="Enter email" />

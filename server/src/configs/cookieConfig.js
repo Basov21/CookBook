@@ -1,4 +1,4 @@
-const jwtConfig = require('../configs/jwtConfig');
+const jwtConfig = require('./jwtConfig');
 
 const cookieConfig = {
   access: {
