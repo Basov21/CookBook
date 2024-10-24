@@ -20,16 +20,16 @@ export default function RecipePage({user}) {
   }
 
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card style={{ width: '30rem', marginLeft: "auto", marginRight: "auto", top: "50px"}}>
       <Card.Img variant="top" src={recipe.img} />
       <Card.Body>
-        <Card.Title>{recipe.title}</Card.Title>
+        <Card.Title><h4>{recipe.title}</h4></Card.Title>
       </Card.Body>
       <ListGroup className="list-group-flush">
-        <ListGroup.Item>Ингредиенты: {recipe.ingredients}</ListGroup.Item>
-        <ListGroup.Item>Колличество ингредиентов: {recipe.quantity}</ListGroup.Item>
-        <ListGroup.Item>Способ приготовления: {recipe.instruction}</ListGroup.Item>
-        <ListGroup.Item>Время приготовления: {recipe.time}</ListGroup.Item>
+        <ListGroup.Item><h6>Ингредиенты: </h6>{recipe.ingredients}</ListGroup.Item>
+        <ListGroup.Item><h6>Колличество ингредиентов: </h6>{recipe.quantity}</ListGroup.Item>
+        <ListGroup.Item><h6>Способ приготовления: </h6>{recipe.instruction}</ListGroup.Item>
+        <ListGroup.Item><h6>Время приготовления: </h6>{recipe.time}</ListGroup.Item>
       </ListGroup>
       <Card.Body>
         <Button variant="danger">В избранное</Button>{' '}
