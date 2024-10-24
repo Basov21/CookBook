@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 
-export default function RecipeCard({ recipe }) {
+export default function RecipeCard({ recipe, user }) {
   return (
     <Card style={{ width: '35rem', top: '30px', margin: 'auto', marginTop: "40px"}}>
       <Card.Img variant="top" src={recipe.img} />
@@ -12,7 +12,8 @@ export default function RecipeCard({ recipe }) {
         <Button variant="outline-secondary" href={`/recipes/${recipe.id}`}>
           {recipe.title}
         </Button>{' '}
-        <Button variant="danger">В избранное</Button>{' '}
+       
+        <Button variant="danger" disabled={!user}>В избранное</Button>
       </Card.Body>
       <ListGroup className="list-group-flush">
         <ListGroup.Item>Количество ингредиентов: {recipe.quantity}</ListGroup.Item>
