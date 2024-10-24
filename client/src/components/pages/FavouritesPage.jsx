@@ -12,6 +12,8 @@ export default function FavouritesPage({user}) {
     });
   }, []);
 
+
+
   return (
 
       <div>
