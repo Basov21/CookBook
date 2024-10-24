@@ -21,10 +21,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
-<<<<<<< HEAD
-=======
     "cookie-parser": "^1.4.7",
->>>>>>> eb167de875932dd984e1aba08494aaab660e5baa
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
