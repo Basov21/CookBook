@@ -46,7 +46,7 @@ authRouter.post('/login', async (req, res) => {
     .json({ user, accessToken });
 });
 
-authRouter.get('/logout', (req, res) => {
+authRouter.post('/logout', (req, res) => {
   res.clearCookie('refreshToken').status(200).send('Logout successfull!');
 });
 
