@@ -1,21 +1,41 @@
-import React from 'react';
 import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Button from 'react-bootstrap/Button';
 
-export default function NavBar() {
+import Navbar from 'react-bootstrap/Navbar';
+import Dropdown from 'react-bootstrap/Dropdown';
+
+export default function NavBar({ user, logoutHandler }) {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar
+      expand="lg"
+      className="bg-body-tertiary"
+      style={{ display: 'flex', justifyContent: 'space-between' }}
+    >
       <Container>
-        <Navbar.Brand href="/">Meetups</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="/login">Войти</Nav.Link>
-            <Nav.Link href="/signup">Регистрация</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
+        <Button variant="outline-secondary" href="/">
+          , эти рецепты для тебя
+        </Button>{' '}
+         
+          <>
+            <Button variant="outline-danger" href="/favorites">
+              Избранное
+            </Button>{' '}
+            <Button variant="outline-info" onClick={logoutHandler}>
+              Выйти
+            </Button>{' '}
+          </>
+        
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Вход/Регистрация
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="/login">Вход</Dropdown.Item>
+              <Dropdown.Item href="/signup">Регистрация</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+    
       </Container>
     </Navbar>
   );

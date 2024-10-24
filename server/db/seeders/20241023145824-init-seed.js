@@ -1,8 +1,17 @@
 'use strict';
 
+const { hashSync } = require('bcrypt');
+const { User } = require('../models');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
+
+    await User.bulkCreate([
+      { name: 'Alex', email: 'alex@mail.com', hashpass: hashSync('123', 10) },
+      { name: 'Bob', email: 'bob@mail.com', hashpass: hashSync('123', 10) },
+    ]);
+
     await queryInterface.bulkInsert(
       'Recipes',
       [

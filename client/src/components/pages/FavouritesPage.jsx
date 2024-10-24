@@ -1,6 +1,6 @@
 
 
-export default function FavouritesPage() {
+export default function FavouritesPage({user, recipes}) {
   return (
     <div>
       
