@@ -13,9 +13,9 @@ export default function NavBar({ user, logoutHandler }) {
     >
       <Container>
         <Button variant="outline-secondary" href="/">
-          {user.name}, эти рецепты для тебя
+          , эти рецепты для тебя
         </Button>{' '}
-        {user ? (
+         
           <>
             <Button variant="outline-danger" href="/favorites">
               Избранное
@@ -24,7 +24,7 @@ export default function NavBar({ user, logoutHandler }) {
               Выйти
             </Button>{' '}
           </>
-        ) : (
+        
           <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               Вход/Регистрация
@@ -35,7 +35,7 @@ export default function NavBar({ user, logoutHandler }) {
               <Dropdown.Item href="/signup">Регистрация</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-        )}
+    
       </Container>
     </Navbar>
   );

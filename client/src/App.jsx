@@ -12,6 +12,9 @@ import SignupPage from './components/pages/SignupPage';
 
 function App() {
   const [user, setUser] = useState();
+  const [recipes, setRecipes] = useState([]);
+
+
 
   useEffect(() => {
     axiosInstance
@@ -45,9 +48,18 @@ function App() {
     setAccessToken('');
   };
 
+  useEffect(() => {
+    axiosInstance.get('/recipes').then((response) => {
+      setRecipes(response.data);
+    });
+  }, []);
+
+
+
+
   const router = createBrowserRouter([
     {
-      path: '/',
+
       element: <Layout user={user} logoutHandler={logoutHandler}/>,
       children: [
         {
@@ -56,13 +68,13 @@ function App() {
         },
         {
           path: '/:recipeId',
-          element: <RecipePage />,
+          element: <RecipePage recipes={recipes} setRecipes={setRecipes}/>,
         },
         {
           path: '/account',
           element: (
             <ProtectedRouter redirectPath="/login" isAllowed={!!user}>
-              <FavouritesPage user={user} />
+              <FavouritesPage user={user} recipes={recipes}/>
             </ProtectedRouter>
           ),
         },
