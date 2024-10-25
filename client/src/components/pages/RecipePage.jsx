@@ -60,7 +60,7 @@ export default function RecipePage({ handleAddFavourite }) {
         </ListGroup.Item>
       </ListGroup>
       <Card.Body>
-        <Button variant="danger" onClick={() => handleAddFavourite(recipe)}>
+        <Button variant="danger" onClick={() => handleAddFavourite(recipe.id)}>
           В избранное{' '}
         </Button>{' '}
       </Card.Body>

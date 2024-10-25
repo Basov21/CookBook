@@ -34,7 +34,7 @@ export default function RecipeCard({ recipe, handleAddFavourite, user }) {
         <Button
           variant="danger"
           disabled={!user}
-          onClick={() => handleAddFavourite(recipe.title)}
+          onClick={() => handleAddFavourite(recipe.id)}
           style={{
             borderRadius: '35px',
             height: '40px',
