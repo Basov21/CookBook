@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter, useNavigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import FavouritesPage from './components/pages/FavouritesPage';
 import MainPage from './components/pages/MainPage';
@@ -15,20 +15,27 @@ function App() {
   const [user, setUser] = useState();
   const [favouriteRecipes, setFavouriteRecipes] = useState([]);
 
-  useEffect(() => {
-    axiosInstance.get('/favourites').then((response) => {
-      setFavouriteRecipes(response.data);
-    });
-  }, []);
 
+  useEffect(() => {
+    const fetchFavouriteRecipes = async () => {
+      try {
+        const response = await axiosInstance.get('/favourites');
+        setFavouriteRecipes(response.data);
+      } catch (error) {
+        console.error("Ошибка при получении избранных рецептов:", error);
+      }
+    };
+  
+    fetchFavouriteRecipes();
+  }, []);
+  
   const handleAddFavourite = async (recipeId) => {
     try {
       const response = await axiosInstance.post('/favourites', { recipeId });
       console.log(response);
-      // Обнови состояние избранных рецептов
       setFavouriteRecipes((prev) => [response.data, ...prev]);
     } catch (error) {
-      console.log(error);
+      console.error("Ошибка при добавлении в избранное:", error);
     }
   };
 
@@ -38,49 +45,67 @@ function App() {
   }
 
   useEffect(() => {
-    axiosInstance
-      .get('/tokens/refresh')
-      .then((res) => {
+    const refreshTokens = async () => {
+      try {
+        const res = await axiosInstance.get('/tokens/refresh');
         setUser(res.data.user);
         setAccessToken(res.data.accessToken);
-      })
-      .catch(() => {
+      } catch (error) {
+        console.error("Ошибка при обновлении токенов:", error);
         setUser(null);
-      });
+      }
+    };
+  
+    refreshTokens();
   }, []);
-
-  const signupHandler = async (e) => {
+  
+  const signupHandler = async (e, navigate) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    const res = await axiosInstance.post('/auth/signup', data);
-    if (res.status === 200) {
-      setUser(res.data.user);
-      setAccessToken(res.data.accessToken);
+    
+    try {
+      const res = await axiosInstance.post('/auth/signup', data);
+      if (res.status === 200) {
+        setUser(res.data.user);
+        setAccessToken(res.data.accessToken);
+        navigate('/');
+      }
+    } catch (error) {
+      console.error("Ошибка при регистрации:", error);
     }
-    window.location.href = '/';
   };
-
-  const loginHandler = async (e) => {
+  
+  const loginHandler = async (e, navigate) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    const res = await axiosInstance.post('/auth/login', data);
-    if (res.status === 200) {
-      setUser(res.data.user);
-      setAccessToken(res.data.accessToken);
+  
+    try {
+      const res = await axiosInstance.post('/auth/login', data);
+      if (res.status === 200) {
+        setUser(res.data.user);
+        setAccessToken(res.data.accessToken);
+        navigate('/');
+      }
+    } catch (error) {
+      console.error("Ошибка при входе в систему:", error);
     }
-    window.location.href = '/';
   };
-
-  const logoutHandler = async () => {
-    const res = await axiosInstance.post('/auth/logout');
-    if (res.status === 200) {
-      setUser(null);
-      setAccessToken('');
+  
+  const logoutHandler = async (navigate) => {
+    try {
+      const res = await axiosInstance.post('/auth/logout');
+      if (res.status === 200) {
+        setUser(null);
+        setAccessToken('');
+        navigate('/');
+      }
+    } catch (error) {
+      console.error("Ошибка при выходе из системы:", error);
     }
-    window.location.href = '/';
   };
+  
 
   const router = createBrowserRouter([
     {

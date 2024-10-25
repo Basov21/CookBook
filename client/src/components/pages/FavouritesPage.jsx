@@ -7,9 +7,16 @@ export default function FavouritesPage({ favouriteRecipes, handleAddFavourite, h
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    axiosInstance.get('/favourites').then((response) => {
-      setRecipes(response.data);
-    });
+    const fetchFavourites = async () => {
+      try {
+        const response = await axiosInstance.get('/favourites');
+        setRecipes(response.data);
+      } catch (error) {
+        console.error("Ошибка при получении избранных рецептов:", error);
+      }
+    };
+  
+    fetchFavourites();
   }, []);
 
   if (recipes.length === 0) {
