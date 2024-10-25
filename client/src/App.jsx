@@ -1,4 +1,3 @@
-
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Layout from './components/Layout';
 import FavouritesPage from './components/pages/FavouritesPage';
@@ -9,6 +8,7 @@ import RecipePage from './components/pages/RecipePage';
 import ProtectedRouter from './components/HOCs/ProtectedRouter';
 import LoginPage from './components/pages/LoginPage';
 import SignupPage from './components/pages/SignupPage';
+import ErrorPage from './components/pages/ErrorPage';
 
 
 function App() {
@@ -81,10 +81,11 @@ function App() {
     {
 
       element: <Layout user={user} logoutHandler={logoutHandler} />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: '/',
-          element: <MainPage handleAddFavourite={handleAddFavourite}/>,
+          element: <MainPage handleAddFavourite={handleAddFavourite} user={user}/>,
         },
         {
           path: '/recipes/:recipeId',
