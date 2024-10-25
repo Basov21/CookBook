@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function NavBar({ user, logoutHandler }) {
   const navigate = useNavigate();
@@ -40,7 +40,8 @@ export default function NavBar({ user, logoutHandler }) {
                 paddingTop: '9px',
               }}
               variant="danger"
-              onClick={() => handleNavigate('/favourites')}
+              to='/favourites'
+              as={Link}
             >
               Избранное
             </Button>

@@ -33,15 +33,13 @@ export default function FavouritesPage({ favouriteRecipes, handleAddFavourite}) 
     );
   }
 
-  return (
-    <div>
-      {recipes.map((recipe) => (
-        <RecipeCard
-          key={recipe.id}
-          recipe={recipe}
-          handleAddFavourite={handleAddFavourite}
-        />
-      ))}
-    </div>
-  );
+return (
+
+  <div>
+    {console.log(favouriteRecipes)}
+    {recipes.map((recipe) => (
+      <RecipeCard key={recipe.id} recipe={recipe} handleAddFavourite={handleAddFavourite}/>))}
+  </div>
+
+)
 }
