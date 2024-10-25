@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/esm/Button';
 import axiosInstance from '../../api/axiosInstance';
 import SpinnerUi from '../ui/SpinnerUi';
 
-export default function RecipePage({handleAddFavourite}) {
+export default function RecipePage({ handleAddFavourite }) {
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);
 
@@ -18,16 +18,24 @@ export default function RecipePage({handleAddFavourite}) {
   }, [recipeId]);
 
   if (!recipe) {
-    return <div>
-      <SpinnerUi/>
-      </div>;
+    return (
+      <div>
+        <SpinnerUi />
+      </div>
+    );
   }
 
   return (
     <Card
-      style={{ width: '30rem', marginLeft: 'auto', marginRight: 'auto', top: '50px', borderRadius: "25px" }}
+      style={{
+        width: '40rem',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        top: '50px',
+        borderRadius: '25px',
+      }}
     >
-      <Card.Img variant="top" src={recipe.img} style={{borderRadius: "25px"}} />
+      <Card.Img variant="top" src={recipe.img} style={{ borderRadius: '25px' }} />
       <Card.Body>
         <Card.Title>
           <h4>{recipe.title}</h4>
@@ -52,7 +60,9 @@ export default function RecipePage({handleAddFavourite}) {
         </ListGroup.Item>
       </ListGroup>
       <Card.Body>
-        <Button variant="danger"  onClick={() => handleAddFavourite(recipe.id)}>В избранное </Button>{' '}
+        <Button variant="danger" onClick={() => handleAddFavourite(recipe)}>
+          В избранное{' '}
+        </Button>{' '}
       </Card.Body>
     </Card>
   );
