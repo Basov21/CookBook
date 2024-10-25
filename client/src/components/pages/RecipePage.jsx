@@ -12,9 +12,16 @@ export default function RecipePage({ handleAddFavourite }) {
   const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {
-    axiosInstance.get(`/recipes/${recipeId}`).then((response) => {
-      setRecipe(response.data);
-    });
+    const fetchRecipe = async () => {
+      try {
+        const response = await axiosInstance.get(`/recipes/${recipeId}`);
+        setRecipe(response.data);
+      } catch (error) {
+        console.error("Ошибка при получении данных рецепта:", error);
+      }
+    };
+  
+    fetchRecipe();
   }, [recipeId]);
 
   if (!recipe) {

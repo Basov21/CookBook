@@ -25,9 +25,15 @@ export default function MainPage({ handleAddFavourite, user }) {
   });
 
   useEffect(() => {
-    axiosInstance.get('/recipes').then((response) => {
-      setRecipes(response.data);
-    });
+    const fetchRecipes = async () => {
+      try {
+        const response = await axiosInstance.get('/recipes');
+        setRecipes(response.data);
+      } catch (error) {
+        console.error("Ошибка при получении рецептов:", error);
+      }
+    };
+    fetchRecipes();
   }, []);
 
   return (

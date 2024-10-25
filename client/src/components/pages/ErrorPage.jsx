@@ -6,11 +6,20 @@ export default function ErrorPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate('/');
-    }, 5000)
-    return () => clearTimeout(timer);
-  },[navigate])
+    const navigateWithDelay = async () => {
+      try {
+        const timer = setTimeout(() => {
+          navigate('/');
+        }, 5000);
+        
+        return () => clearTimeout(timer);
+      } catch (error) {
+        console.error("Ошибка при навигации:", error);
+      }
+    };
+  
+    navigateWithDelay();
+  }, [navigate]);
 
 
   return (
