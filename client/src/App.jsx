@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter, useNavigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import FavouritesPage from './components/pages/FavouritesPage';
 import MainPage from './components/pages/MainPage';
@@ -14,6 +14,7 @@ import ErrorPage from './components/pages/ErrorPage';
 function App() {
   const [user, setUser] = useState();
   const [favouriteRecipes, setFavouriteRecipes] = useState([]);
+
 
   useEffect(() => {
     const fetchFavouriteRecipes = async () => {
@@ -53,7 +54,7 @@ function App() {
     refreshTokens();
   }, []);
   
-  const signupHandler = async (e) => {
+  const signupHandler = async (e, navigate) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
@@ -63,14 +64,14 @@ function App() {
       if (res.status === 200) {
         setUser(res.data.user);
         setAccessToken(res.data.accessToken);
-        window.location.href = '/';
+        navigate('/');
       }
     } catch (error) {
       console.error("Ошибка при регистрации:", error);
     }
   };
   
-  const loginHandler = async (e) => {
+  const loginHandler = async (e, navigate) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
@@ -80,20 +81,20 @@ function App() {
       if (res.status === 200) {
         setUser(res.data.user);
         setAccessToken(res.data.accessToken);
-        window.location.href = '/';
+        navigate('/');
       }
     } catch (error) {
       console.error("Ошибка при входе в систему:", error);
     }
   };
   
-  const logoutHandler = async () => {
+  const logoutHandler = async (navigate) => {
     try {
       const res = await axiosInstance.post('/auth/logout');
       if (res.status === 200) {
         setUser(null);
         setAccessToken('');
-        window.location.href = '/';
+        navigate('/');
       }
     } catch (error) {
       console.error("Ошибка при выходе из системы:", error);

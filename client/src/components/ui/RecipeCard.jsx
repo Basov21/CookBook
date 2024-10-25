@@ -1,8 +1,14 @@
 import Card from 'react-bootstrap/Card';
-
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
 export default function RecipeCard({ recipe, handleAddFavourite, user }) {
+  const navigate = useNavigate();
+
+  const goToRecipePage = (recipeId) => {
+    navigate(`/recipes/${recipeId}`);
+  };
+
   return (
     <Card
       style={{
@@ -21,7 +27,7 @@ export default function RecipeCard({ recipe, handleAddFavourite, user }) {
       <Card.Body style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Button
           variant="outline-dark"
-          href={`/recipes/${recipe.id}`}
+          onClick={() => goToRecipePage(recipe.id)}
           style={{
             borderRadius: '35px',
             paddingTop: '10px',
@@ -30,7 +36,7 @@ export default function RecipeCard({ recipe, handleAddFavourite, user }) {
           }}
         >
           <h5 style={{ paddingTop: '5px' }}>{recipe.title}</h5>
-        </Button>{' '}
+        </Button>
         <Button
           variant="danger"
           disabled={!user}
@@ -50,29 +56,22 @@ export default function RecipeCard({ recipe, handleAddFavourite, user }) {
           >
             ♡
           </h3>
-        </Button>{' '}
+        </Button>
       </Card.Body>
 
-      <tr
-        style={{ display: 'flex', justifyContent: 'space-around', paddingBottom: '10px' }}
-      >
-        <th>Количество ингредиентов:</th>
-        <th>Время приготовления:</th>
-      </tr>
-      <tr
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          paddingBottom: '10px',
-        }}
-      >
-        <td style={{ paddingLeft: '110px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-around', paddingBottom: '10px' }}>
+        <span>Количество ингредиентов:</span>
+        <span>Время приготовления:</span>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '10px' }}>
+        <div style={{ paddingLeft: '110px' }}>
           <h3>{recipe.quantity}</h3>
-        </td>
-        <td style={{ paddingRight: '60px' }}>
+        </div>
+        <div style={{ paddingRight: '60px' }}>
           <h3>{recipe.time} минут</h3>
-        </td>
-      </tr>
+        </div>
+      </div>
     </Card>
   );
 }
+

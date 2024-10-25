@@ -1,15 +1,21 @@
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useNavigate } from 'react-router-dom';
 
 export default function NavBar({ user, logoutHandler }) {
+  const navigate = useNavigate();
+
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
+
   return (
     <Navbar style={{ backgroundColor: 'rgb(209, 209, 209)' }}>
       <Container
-        style={{ display: 'flex', justifyContent: 'space-evenly', height: '6  0px' }}
+        style={{ display: 'flex', justifyContent: 'space-evenly', height: '60px' }}
       >
         <Button
           style={{
@@ -20,10 +26,10 @@ export default function NavBar({ user, logoutHandler }) {
             paddingTop: '9px',
           }}
           variant="outline-success"
-          href="/"
+          onClick={() => handleNavigate('/')}
         >
           {user ? user.name : 'Гость'}, рецепты для тебя
-        </Button>{' '}
+        </Button>
         {user ? (
           <>
             <Button
@@ -34,10 +40,10 @@ export default function NavBar({ user, logoutHandler }) {
                 paddingTop: '9px',
               }}
               variant="danger"
-              href="/favourites"
+              onClick={() => handleNavigate('/favourites')}
             >
               Избранное
-            </Button>{' '}
+            </Button>
             <Button
               style={{
                 borderRadius: '20px',
@@ -46,46 +52,42 @@ export default function NavBar({ user, logoutHandler }) {
                 paddingTop: '9px',
               }}
               variant="outline-dark"
-              onClick={logoutHandler}
-              href="/"
+              onClick={() => {
+                logoutHandler();
+                handleNavigate('/');
+              }}
             >
               Выйти
-            </Button>{' '}
+            </Button>
           </>
         ) : (
-          <>
-            <Dropdown>
-              <Dropdown.Toggle
-                style={{
-                  borderRadius: '20px',
-                  height: '50px',
-                  fontSize: '20px',
-                  paddingTop: '9px',
-                }}
-                variant="success"
-                id="dropdown-basic"
-              >
-                Вход/Регистрация
-              </Dropdown.Toggle>
+          <Dropdown>
+            <Dropdown.Toggle
+              style={{
+                borderRadius: '20px',
+                height: '50px',
+                fontSize: '20px',
+                paddingTop: '9px',
+              }}
+              variant="success"
+              id="dropdown-basic"
+            >
+              Вход/Регистрация
+            </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <Dropdown.Item>
-                  <Link style={{ textDecoration: 'none' }} to="/login">
-                    Вход
-                  </Link>
-                </Dropdown.Item>
-                <NavDropdown.Divider />
-
-                <Dropdown.Item>
-                  <Link style={{ textDecoration: 'none' }} to="/signup">
-                    Регистрация
-                  </Link>
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => handleNavigate('/login')}>
+                Вход
+              </Dropdown.Item>
+              <NavDropdown.Divider />
+              <Dropdown.Item onClick={() => handleNavigate('/signup')}>
+                Регистрация
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         )}
       </Container>
     </Navbar>
   );
 }
+
