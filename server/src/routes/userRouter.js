@@ -9,6 +9,8 @@ favouriteRouter
     const userId = res.locals.user.id;
     const favourites = await Favourite.findAll({ where: { userId} });
     res.json(favourites);
+    console.log(favourites);
+    
     // const favourites = await Favourite.findAll({
     //   where: { userId }})
     
@@ -19,6 +21,8 @@ favouriteRouter
     // })
     // const recipes = favourites.map(fav => fav.recipe);
     // res.json(recipes)
+    // console.log(recipes);
+    
   })
 
   .post(verifyAccessToken, async (req, res) => {
