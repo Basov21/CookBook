@@ -426,7 +426,7 @@ module.exports = {
         time: 80,
         instruction:
           'Приготовьте тесто, обжарьте капусту, заверните в тесто и выпекайте в духовке.',
-        img: 'https://i.ibb.co/nrPrSBL/anon-3593967.jpg',
+        img: 'https://masterpiecer-images.s3.yandex.net/f9f73bcfaced11ee9ec5e6d39d9a42a4:upscaled',
       },
       {
         title: 'Фрикадельки в томатном соусе',
