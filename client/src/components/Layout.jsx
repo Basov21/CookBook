@@ -4,7 +4,7 @@ import NavBar from './ui/NavBar';
 
 export default function Layout({ user, logoutHandler }) {
   return (
-    <div style={{ height: '5500px', backgroundColor: 'rgb(250, 250, 250)' }}>
+    <div style={{ maxHeight: 'auto', backgroundColor: 'rgb(250, 250, 250)' }}>
       <NavBar user={user} logoutHandler={logoutHandler} />
       <Outlet />
     </div>

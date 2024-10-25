@@ -57,11 +57,9 @@ export default function RecipeCard({ recipe, handleAddFavourite, user, onDelete 
             ♡
           </h3>
         </Button>
-        <Button variant="outline-dark" href={`/recipes/${recipe.id}`} style={{borderRadius: "35px", paddingTop: '10px',   marginLeft: "auto", marginRight: "auto", backgroundColour: 'rgb(200, 255, 235)'}}>
-          <h5 style={{paddingTop: "5px"}}>{recipe.title}</h5>
-        </Button>{' '}
+      
         <Button variant="danger" disabled={!user} onClick={()=>handleAddFavourite(recipe.id)} style={{borderRadius: "35px",height: "40px", width: "40px", paddingBottom: '1px', position: "absolute", top: "10px", right: "10px"}} ><h3 style={{position: "absolute", top: "-9px", right: "4px", fontSize: "45px"}}>♡</h3></Button>{' '}
-        <Button variant="danger" onClick={() => onDelete(recipe.id)} style={{borderRadius: "35px",height: "40px", width: "40px", paddingBottom: '1px', position: "absolute", top: "20px", right: "30px"}} ><h3 style={{position: "absolute", top: "-9px", right: "4px", fontSize: "45px"}}>del</h3></Button>{' '}
+        <Button variant="danger" onClick={() => onDelete(recipe.id)} style={{borderRadius: "35px",height: "40px", width: "40px", paddingBottom: '1px', position: "absolute", top: "20px", right: "420px"}} ><h5 style={{position: "absolute", top: "3px", right: "4px", fontSize: "25px"}}>del</h5></Button>{' '}
       </Card.Body>
 
       <div style={{ display: 'flex', justifyContent: 'space-around', paddingBottom: '10px' }}>
