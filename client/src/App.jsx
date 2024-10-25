@@ -85,7 +85,7 @@ function App() {
       children: [
         {
           path: '/',
-          element: <MainPage handleAddFavourite={handleAddFavourite}/>,
+          element: <MainPage handleAddFavourite={handleAddFavourite} user={user}/>,
         },
         {
           path: '/recipes/:recipeId',
