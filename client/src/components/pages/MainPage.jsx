@@ -19,9 +19,14 @@ export default function MainPage({ handleAddFavourite, user }) {
       return a.quantity - b.quantity;
     } else if (sortOrder === 'quantityDesc') {
       return b.quantity - a.quantity;
+    } else if (sortOrder === 'quantityAlphabet') {
+        return a.title >  b.title ? 1 : -1
+      } else if (sortOrder === 'quantityAlphabet2') {
+        return b.title >  a.title ? 1 : -1
     } else {
       return 0;
     }
+
   });
 
   useEffect(() => {
@@ -68,6 +73,14 @@ export default function MainPage({ handleAddFavourite, user }) {
           <NavDropdown.Divider />
           <option value="quantityDesc">
             Сортировать по количеству ингредиентов (убывание)
+          </option>
+          <NavDropdown.Divider /> 
+          <option value="quantityAlphabet">
+            Сортировать по алфавиту (А-Я)
+          </option>
+          <NavDropdown.Divider /> 
+          <option value="quantityAlphabet2">
+            Сортировать по алфавиту (Я-А)
           </option>
         </select>
       </div>
