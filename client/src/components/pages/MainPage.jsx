@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 
-export default function MainPage({ handleAddFavourite }) {
+export default function MainPage({ handleAddFavourite, user }) {
   const [recipes, setRecipes] = useState([]);
   const [sortOrder, setSortOrder] = useState(null);
 
@@ -43,7 +43,7 @@ export default function MainPage({ handleAddFavourite }) {
       </div>
       {sortedRecipes.map((recipe) => (
             <Col key={recipe.id} md={6}>
-            <RecipeCard  recipe={recipe} handleAddFavourite={handleAddFavourite}/>
+            <RecipeCard  recipe={recipe} handleAddFavourite={handleAddFavourite} user={user}/>
           </Col>
         ))}
       </Row>
