@@ -498,6 +498,10 @@ module.exports = {
         userId: 1,
         recipeId: 2,
       },
+      {
+        userId: 1,
+        recipeId: 4,
+      }
     ]);
   },
 
