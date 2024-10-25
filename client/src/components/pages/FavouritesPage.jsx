@@ -3,7 +3,7 @@ import axiosInstance from "../../api/axiosInstance";
 import RecipeCard from "../ui/RecipeCard";
 
 
-export default function FavouritesPage({ favouriteRecipes, handleAddFavourite, handleDeleteFav }) {
+export default function FavouritesPage({ favouriteRecipes, handleAddFavourite }) {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -19,6 +19,11 @@ export default function FavouritesPage({ favouriteRecipes, handleAddFavourite, h
     fetchFavourites();
   }, []);
 
+  const handleDeleteFav = async (recipeId) => {
+    await axiosInstance.delete('/favourites',{ data: { recipeId } });
+    setRecipes(recipes.filter((recipe)=>recipe.id !== recipeId))
+  }
+
   if (recipes.length === 0) {
     return <div style= {{textAlign: 'center', marginTop: '50px', fontSize: '20px', color: 'red'}}>Вы не добавили ни одного рецепта</div>;
   }
@@ -27,7 +32,7 @@ return (
 
   <div>
     {console.log(favouriteRecipes)}
-    {favouriteRecipes.map((recipe) => (
+    {recipes.map((recipe) => (
       <RecipeCard key={recipe.id} recipe={recipe} handleAddFavourite={handleAddFavourite} onDelete={()=>handleDeleteFav(recipe.id)}/>))}
   </div>
 

@@ -39,10 +39,7 @@ function App() {
     }
   };
 
-  const handleDeleteFav = async (recipeId) => {
-    await axiosInstance.delete('/favourites',{ data: { recipeId } });
-    setFavouriteRecipes(favouriteRecipes.filter((recipe)=>recipe.id !== recipeId))
-  }
+  
 
   useEffect(() => {
     const refreshTokens = async () => {
@@ -125,7 +122,7 @@ function App() {
           path: '/favourites',
           element: (
 
-            <FavouritesPage favouriteRecipes={favouriteRecipes} handleAddFavourite={handleAddFavourite} handleDeleteFav={handleDeleteFav}/>
+            <FavouritesPage favouriteRecipes={favouriteRecipes} handleAddFavourite={handleAddFavourite} user={user}/>
 
           ),
         },
