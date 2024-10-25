@@ -3,7 +3,7 @@ import axiosInstance from "../../api/axiosInstance";
 import RecipeCard from "../ui/RecipeCard";
 
 
-export default function FavouritesPage({ favouriteRecipes, handleAddFavourite }) {
+export default function FavouritesPage({ favouriteRecipes, handleAddFavourite, handleDeleteFav }) {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ return (
   <div>
     {console.log(favouriteRecipes)}
     {favouriteRecipes.map((recipe) => (
-      <RecipeCard key={recipe.id} recipe={recipe} handleAddFavourite={handleAddFavourite}/>))}
+      <RecipeCard key={recipe.id} recipe={recipe} handleAddFavourite={handleAddFavourite} onDelete={()=>handleDeleteFav(recipe.id)}/>))}
   </div>
 
 )
