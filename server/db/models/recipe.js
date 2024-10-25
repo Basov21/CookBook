@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({ User }) {
-      this.belongsToMany(User, { through: 'Favourites', foreignKey: 'recipeId' });
+      this.belongsToMany(User, { through: 'Favourites', foreignKey: 'recipeId', as: 'liked' });
+      this.belongsTo(User, { foreignKey: 'userId', as: 'usersRecipe' });
     }
   }
   Recipe.init(
@@ -20,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       time: DataTypes.INTEGER,
       instruction: DataTypes.TEXT,
       img: DataTypes.STRING,
+      userId: DataTypes.INTEGER,
     },
     {
       sequelize,
