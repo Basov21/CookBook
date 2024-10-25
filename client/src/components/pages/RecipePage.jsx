@@ -5,6 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import axiosInstance from '../../api/axiosInstance';
+import SpinnerUi from '../ui/SpinnerUi';
 
 export default function RecipePage({handleAddFavourite}) {
   const { recipeId } = useParams();
@@ -17,7 +18,9 @@ export default function RecipePage({handleAddFavourite}) {
   }, [recipeId]);
 
   if (!recipe) {
-    return <div>Loading...</div>;
+    return <div>
+      <SpinnerUi/>
+      </div>;
   }
 
   return (
