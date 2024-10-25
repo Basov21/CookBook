@@ -4,11 +4,21 @@ const favouriteRouter = express.Router();
 const verifyAccessToken = require('../middlewares/verifyAccessToken')
 
 favouriteRouter
-.route('/')
+  .route('/')
   .get(verifyAccessToken, async (req, res) => {
     const userId = res.locals.user.id;
     const favourites = await Favourite.findAll({ where: { userId} });
     res.json(favourites);
+    // const favourites = await Favourite.findAll({
+    //   where: { userId }})
+    
+    //   res.json(favourites)
+    //   include: {
+    //     model: Recipe,
+    //   },
+    // })
+    // const recipes = favourites.map(fav => fav.recipe);
+    // res.json(recipes)
   })
 
   .post(verifyAccessToken, async (req, res) => {
@@ -19,14 +29,14 @@ favouriteRouter
     try {
       const { recipeId } = req.body;
       const userId = res.locals.user.id;
-  
+
       const favourite = await Favourite.create({ userId, recipeId });
       res.json(favourite);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       res.status(500).json({ error: 'Failed to add favourite' });
     }
-  
+
   });
 
 module.exports = favouriteRouter
