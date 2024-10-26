@@ -38,7 +38,7 @@ return (
   <div>
     {console.log(favouriteRecipes)}
     {recipes.map((recipe) => (
-      <RecipeCard key={recipe.id} recipe={recipe} handleAddFavourite={handleAddFavourite}/>))}
+      <RecipeCard key={recipe.id} recipe={recipe} handleAddFavourite={handleAddFavourite} onDelete={() => handleDeleteFav(recipe.id)}/>))}
   </div>
 
 )

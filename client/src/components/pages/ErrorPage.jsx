@@ -26,7 +26,7 @@ export default function ErrorPage() {
     
     <Container  className="d-flex justify-content-center align-items-center" >
 <div >
-          <Image src="../../../public/img/photo_5249117529920626948_y.jpg" style={{height: "750px"}}/>
+          <Image src="/img/photo_5249117529920626948_y.jpg" style={{height: "750px"}}/>
           
           </div>
 
